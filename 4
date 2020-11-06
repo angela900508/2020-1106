@@ -1,0 +1,33 @@
+ var doneItem = document.createElement("div");
+  var doneItemText = document.createElement("div");
+  var doneItemIcons = document.createElement("div");
+  var doneItemIconsTrash = document.createElement("div");
+  var doneItemIconsDone = document.createElement("div");
+  //添加class
+  doneItem.className="done__item";
+  doneItemText.className="done__item__text";
+  doneItemIcons.className="done__item__icons";
+  doneItemIconsTrash.className="done__item__icons__trash";
+  doneItemIconsDone.className="done__item__icons__done";
+  //添加完成事項內容
+  doneItemText.innerHTML=doneContent;
+  //添加icon
+  doneItemIconsTrash.innerHTML="<i class="+'"fas fa-trash-alt"'+"></i>";
+  doneItemIconsDone.innerHTML="<i class="+'"fas fa-check-circle"'+"></i>";
+  //添加元素，形成父子關係
+  doneItemIcons.appendChild(doneItemIconsTrash);
+  doneItemIcons.appendChild(doneItemIconsDone);
+  doneItem.appendChild(doneItemText);
+  doneItem.appendChild(doneItemIcons);
+  // doneItem => 
+  // <div class="done__item">
+  //   <div class="done__item__text">test text</div>
+  //   <div class="done__item__icons">
+  //   <div class="done__item__icons__trash">
+  //     <i class="fas fa-trash-alt"></i>
+  //   </div>
+  //   <div class="done__item__icons__done">
+  //     <i class="fas fa-check-circle"></i>
+  //   </div>
+  //   </div>
+  // </div>
