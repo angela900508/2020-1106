@@ -1,9 +1,45 @@
-// Iterates over the contents of a GargantuanTable.  Sample usage:
-//    GargantuanTable_Iterator* iter = table->NewIterator();
-//    for (iter->Seek("foo"); !iter->done(); iter->Next()) {
-//      process(iter->key(), iter->value());
-//    }
-//    delete iter;
-class GargantuanTable_Iterator {
-    ...
-};
+// 1. 打開圖檔
+  //     - 宣告好 canvas
+  const canvas = document.querySelector("#draw");
+  //     - 取得 img tag 的影像來源
+  const img = document.querySelector("img");
+  var ctx = canvas.getContext("2d");
+  const height = img.height;
+  const width = img.width;
+  canvas.width = width;
+  canvas.height = height;
+  ctx.drawImage(img, 0, 0, width, height);
+  const image = ctx.getImageData(0, 0, width, height);
+
+
+  // 2. 影像處理演算法
+  //     - 設定閥值
+  const threshold_input = document.querySelector('#threshold');
+  threshold = threshold_input.value;
+  //     - 處理每一個 pixel
+  for(let i = 0; i < image.data.length; i += 4) {
+    let sum = image.data[i + 0] + image.data[i + 1] + image.data[i + 2];
+    let color = sum / 3;
+    //         - 比閥值大，就變白，不然變黑
+    if(color > threshold) {
+      color = 255;
+    }
+    else {
+      color = 0;
+    }
+    image.data[i + 0] = color; // RED
+    image.data[i + 1] = color; // GREEN
+    image.data[i + 2] = color; // Blue
+  }
+  // 3. 顯示影像處理結果的量化資料
+  //     - 計數黑白值各多少
+  let [countW, countB] = countWB(image);
+  //     - 顯示計算結果到畫面上
+  showReport(countW, countB);
+  console.log(countW / (countW + countB) * 100, countB / (countW + countB) * 100);
+
+  // 4. 顯示影像處理結果的圖形資料
+  //     - 影像結果顯示在 canvas 上
+  const canvas = document.querySelector("#draw");
+  var ctx = canvas.getContext("2d");
+  ctx.putImageData(image, 0, 0);
