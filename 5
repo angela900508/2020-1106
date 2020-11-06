@@ -1,0 +1,10 @@
+function main() {
+  // 1. 打開圖檔
+  let image = openImage("img", "#draw");
+  // 2. 影像處理演算法
+  image = imageProcess(image);
+  // 3. 顯示影像處理結果的量化資料
+  report(image);
+  // 4. 顯示影像處理結果的圖形資料
+  drawImage(image, "#draw");
+}
